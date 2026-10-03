@@ -1,1359 +1,1317 @@
 {
-	"info": {
-		"_postman_id": "917a54f8-2b72-4658-b3a6-07f7fa8bb1f5",
-		"name": "SysTest",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "36604409"
-	},
-	"item": [
-		{
-			"name": "SP-01",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP01_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP01_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP01_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP01_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Урьдач хангасан оюутан бүртгүүлэхэд 201 OK\", function () {",
-									"    pm.response.to.have.status(201);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"OK\");",
-									"    pm.expect(body.registrationID).to.be.a(\"number\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP01_student\",\n  \"courseID\": \"SP01_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-02",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP02_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP02_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C050\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP02_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP02_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Урьдач огт үзээгүй үед ERROR_PREREQUISITES\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
-									"    pm.expect(body.missing).to.eql([\"C101\", \"C102\"]);",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP02_student\",\n  \"courseID\": \"SP02_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-03",
-			"item": [
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP03_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP03_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_NO_COURSE\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP03_student\",\n  \"courseID\": \"SP03_missing_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-04",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP04_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP04_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"inactive\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP04_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP04_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_INACTIVE_STUDENT\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP04_student\",\n  \"courseID\": \"SP04_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-05",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP05_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP05_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_NO_STUDENT\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP05_missing_student\",\n  \"courseID\": \"SP05_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-06",
-			"item": [
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Оюутан ба хичээл байхгүй үед ERROR_NO_STUDENT түрүүлж гарна\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_NO_STUDENT\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP06_missing_student\",\n  \"courseID\": \"SP06_missing_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-07",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP07_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP07_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"inactive\",\n  \"coursesTaken\": [\"C101\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP07_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP07_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Идэвхгүй ба урьдач дутуу үед ERROR_INACTIVE_STUDENT түрүүлж гарна\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_INACTIVE_STUDENT\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP07_student\",\n  \"courseID\": \"SP07_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-08",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": []\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP08_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP08_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": []\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP08_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP08_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Урьдач нөхцөлгүй хичээлд бүртгүүлэхэд 201 OK\", function () {",
-									"    pm.response.to.have.status(201);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"OK\");",
-									"    pm.expect(body.registrationID).to.be.a(\"number\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP08_student\",\n  \"courseID\": \"SP08_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-09",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP09_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP09_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": []\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP09_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP09_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"coursesTaken хоосон бөгөөд урьдачтай үед ERROR_PREREQUISITES\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
-									"    pm.expect(body.missing).to.eql([\"C101\", \"C102\"]);",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP09_student\",\n  \"courseID\": \"SP09_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-10",
-			"item": [
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP10_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP10_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"courseID дутуу үед 400 ERROR_BAD_REQUEST\", function () {",
-									"    pm.response.to.have.status(400);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_BAD_REQUEST\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP10_student\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-11",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP11_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP11_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Students",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/students/SP11_student",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"students",
-								"SP11_student"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Урьдачийн заримыг үзсэн үед зөвхөн C102 дутуу байна\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
-									"    pm.expect(body.missing).to.eql([\"C102\"]);",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"studentID\": \"SP11_student\",\n  \"courseID\": \"SP11_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SP-12",
-			"item": [
-				{
-					"name": "Courses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/courses/SP12_course",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"courses",
-								"SP12_course"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Registrations",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"studentID дутуу үед 400 ERROR_BAD_REQUEST\", function () {",
-									"    pm.response.to.have.status(400);",
-									"    const body = pm.response.json();",
-									"    pm.expect(body.result).to.eql(\"ERROR_BAD_REQUEST\");",
-									"    pm.expect(body).to.not.have.property(\"registrationID\");",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {},
-								"requests": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"courseID\": \"SP12_course\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseURL}}/registrations",
-							"host": [
-								"{{baseURL}}"
-							],
-							"path": [
-								"registrations"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"requests": {},
-				"exec": [
-					"if (pm.request.method === \"PUT\") {",
-					"    pm.test(\"Setup HTTP статус 200\", function () {",
-					"        pm.response.to.have.status(200);",
-					"    });",
-					"",
-					"    pm.test(\"Setup result нь OK\", function () {",
-					"        pm.expect(pm.response.json().result).to.eql(\"OK\");",
-					"    });",
-					"}"
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "baseURL",
-			"value": ""
-		}
-	]
+  "info": {
+    "_postman_id": "917a54f8-2b72-4658-b3a6-07f7fa8bb1f5",
+    "name": "SysTest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36604409"
+  },
+  "item": [
+    {
+      "name": "SP-01",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP01_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP01_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP01_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP01_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Урьдач хангасан оюутан бүртгүүлэхэд 201 OK\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"OK\");",
+                  "    pm.expect(body.registrationID).to.be.a(\"number\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP01_student\",\n  \"courseID\": \"SP01_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-02",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP02_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP02_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C050\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP02_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP02_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Урьдач огт үзээгүй үед ERROR_PREREQUISITES\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
+                  "    pm.expect(body.missing).to.eql([\"C101\", \"C102\"]);",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP02_student\",\n  \"courseID\": \"SP02_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-03",
+      "item": [
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP03_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP03_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Байхгүй хичээлд бүртгүүлэхэд ERROR_NO_COURSE\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_NO_COURSE\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP03_student\",\n  \"courseID\": \"SP03_missing_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-04",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP04_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP04_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"inactive\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP04_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP04_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_INACTIVE_STUDENT\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP04_student\",\n  \"courseID\": \"SP04_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-05",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP05_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP05_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Байхгүй оюутан бүртгүүлэхэд ERROR_NO_STUDENT\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_NO_STUDENT\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP05_missing_student\",\n  \"courseID\": \"SP05_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-06",
+      "item": [
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Оюутан ба хичээл байхгүй үед ERROR_NO_STUDENT түрүүлж гарна\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_NO_STUDENT\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP06_missing_student\",\n  \"courseID\": \"SP06_missing_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-07",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP07_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP07_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"inactive\",\n  \"coursesTaken\": [\"C101\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP07_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP07_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Идэвхгүй ба урьдач дутуу үед ERROR_INACTIVE_STUDENT түрүүлж гарна\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_INACTIVE_STUDENT\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP07_student\",\n  \"courseID\": \"SP07_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-08",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP08_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP08_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP08_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP08_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Урьдач нөхцөлгүй хичээлд бүртгүүлэхэд 201 OK\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"OK\");",
+                  "    pm.expect(body.registrationID).to.be.a(\"number\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP08_student\",\n  \"courseID\": \"SP08_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-09",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP09_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP09_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP09_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP09_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"coursesTaken хоосон бөгөөд урьдачтай үед ERROR_PREREQUISITES\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
+                  "    pm.expect(body.missing).to.eql([\"C101\", \"C102\"]);",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP09_student\",\n  \"courseID\": \"SP09_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-10",
+      "item": [
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP10_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP10_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"courseID дутуу үед 400 ERROR_BAD_REQUEST\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_BAD_REQUEST\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP10_student\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-11",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP11_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP11_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Students",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"active\",\n  \"coursesTaken\": [\"C101\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/students/SP11_student",
+              "host": ["{{baseURL}}"],
+              "path": ["students", "SP11_student"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Урьдачийн заримыг үзсэн үед зөвхөн C102 дутуу байна\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_PREREQUISITES\");",
+                  "    pm.expect(body.missing).to.eql([\"C102\"]);",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"studentID\": \"SP11_student\",\n  \"courseID\": \"SP11_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SP-12",
+      "item": [
+        {
+          "name": "Courses",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Setup HTTP статус 200\", function () {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Setup result нь OK\", function () {",
+                  "        pm.expect(pm.response.json().result).to.eql(\"OK\");",
+                  "    });"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prerequisites\": [\"C101\", \"C102\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/courses/SP12_course",
+              "host": ["{{baseURL}}"],
+              "path": ["courses", "SP12_course"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Registrations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"studentID дутуу үед 400 ERROR_BAD_REQUEST\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.result).to.eql(\"ERROR_BAD_REQUEST\");",
+                  "    pm.expect(body).to.not.have.property(\"registrationID\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseID\": \"SP12_course\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/registrations",
+              "host": ["{{baseURL}}"],
+              "path": ["registrations"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": "http://localhost:3000"
+    }
+  ]
 }

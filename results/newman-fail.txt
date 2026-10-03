@@ -1,4 +1,4 @@
-(node:13615) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(node:13766) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
 (Use `node --trace-deprecation ...` to show where the warning was created)
 newman
 
@@ -6,7 +6,7 @@ SysTest
 
 ❏ SP-01
 ↳ Courses
-  PUT http://localhost:3000/courses/SP01_course [200 OK, 178B, 20ms]
+  PUT http://localhost:3000/courses/SP01_course [200 OK, 178B, 16ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
@@ -16,12 +16,12 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [201 Created, 202B, 2ms]
-  ✓  Урьдач хангасан оюутан бүртгүүлэхэд 201 OK
+  POST http://localhost:3000/registrations [201 Created, 202B, 1ms]
+  1. Урьдач хангасан оюутан бүртгүүлэхэд 201 OK
 
 ❏ SP-02
 ↳ Courses
-  PUT http://localhost:3000/courses/SP02_course [200 OK, 178B, 2ms]
+  PUT http://localhost:3000/courses/SP02_course [200 OK, 178B, 1ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
@@ -31,12 +31,12 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 221B, 2ms]
+  POST http://localhost:3000/registrations [200 OK, 221B, 1ms]
   ✓  Урьдач огт үзээгүй үед ERROR_PREREQUISITES
 
 ❏ SP-03
 ↳ Students
-  PUT http://localhost:3000/students/SP03_student [200 OK, 178B, 2ms]
+  PUT http://localhost:3000/students/SP03_student [200 OK, 178B, 1ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
@@ -56,12 +56,12 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 198B, 1ms]
+  POST http://localhost:3000/registrations [200 OK, 198B, 2ms]
   ✓  Идэвхгүй оюутан бүртгүүлэхэд ERROR_INACTIVE_STUDENT
 
 ❏ SP-05
 ↳ Courses
-  PUT http://localhost:3000/courses/SP05_course [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/courses/SP05_course [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
@@ -71,27 +71,27 @@ SysTest
 
 ❏ SP-06
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 192B, 2ms]
+  POST http://localhost:3000/registrations [200 OK, 192B, 1ms]
   ✓  Оюутан ба хичээл байхгүй үед ERROR_NO_STUDENT түрүүлж гарна
 
 ❏ SP-07
 ↳ Courses
-  PUT http://localhost:3000/courses/SP07_course [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/courses/SP07_course [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
 ↳ Students
-  PUT http://localhost:3000/students/SP07_student [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/students/SP07_student [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 198B, 2ms]
+  POST http://localhost:3000/registrations [200 OK, 198B, 1ms]
   ✓  Идэвхгүй ба урьдач дутуу үед ERROR_INACTIVE_STUDENT түрүүлж гарна
 
 ❏ SP-08
 ↳ Courses
-  PUT http://localhost:3000/courses/SP08_course [200 OK, 178B, 2ms]
+  PUT http://localhost:3000/courses/SP08_course [200 OK, 178B, 1ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
@@ -101,7 +101,7 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [201 Created, 202B, 2ms]
+  POST http://localhost:3000/registrations [201 Created, 202B, 1ms]
   ✓  Урьдач нөхцөлгүй хичээлд бүртгүүлэхэд 201 OK
 
 ❏ SP-09
@@ -111,12 +111,12 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Students
-  PUT http://localhost:3000/students/SP09_student [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/students/SP09_student [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 221B, 1ms]
+  POST http://localhost:3000/registrations [200 OK, 221B, 2ms]
   ✓  coursesTaken хоосон бөгөөд урьдачтай үед ERROR_PREREQUISITES
 
 ❏ SP-10
@@ -136,22 +136,22 @@ SysTest
   ✓  Setup result нь OK
 
 ↳ Students
-  PUT http://localhost:3000/students/SP11_student [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/students/SP11_student [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [200 OK, 214B, 1ms]
+  POST http://localhost:3000/registrations [200 OK, 214B, 2ms]
   ✓  Урьдачийн заримыг үзсэн үед зөвхөн C102 дутуу байна
 
 ❏ SP-12
 ↳ Courses
-  PUT http://localhost:3000/courses/SP12_course [200 OK, 178B, 1ms]
+  PUT http://localhost:3000/courses/SP12_course [200 OK, 178B, 2ms]
   ✓  Setup HTTP статус 200
   ✓  Setup result нь OK
 
 ↳ Registrations
-  POST http://localhost:3000/registrations [400 Bad Request, 202B, 2ms]
+  POST http://localhost:3000/registrations [400 Bad Request, 202B, 1ms]
   ✓  studentID дутуу үед 400 ERROR_BAD_REQUEST
 
 ┌─────────────────────────┬─────────────────┬─────────────────┐
@@ -165,12 +165,19 @@ SysTest
 ├─────────────────────────┼─────────────────┼─────────────────┤
 │      prerequest-scripts │              30 │               0 │
 ├─────────────────────────┼─────────────────┼─────────────────┤
-│              assertions │              48 │               0 │
+│              assertions │              48 │               1 │
 ├─────────────────────────┴─────────────────┴─────────────────┤
-│ total run duration: 533ms                                   │
+│ total run duration: 490ms                                   │
 ├─────────────────────────────────────────────────────────────┤
 │ total data received: 721B (approx)                          │
 ├─────────────────────────────────────────────────────────────┤
-│ average response time: 2ms [min: 1ms, max: 20ms, s.d.: 3ms] │
+│ average response time: 2ms [min: 1ms, max: 16ms, s.d.: 2ms] │
 └─────────────────────────────────────────────────────────────┘
-exit=0
+
+[31m  # [39m[31m failure        [39m[31m detail                                                [39m
+[90m    [39m[90m                [39m[90m                                                       [39m
+ 1.  AssertionError  Урьдач хангасан оюутан бүртгүүлэхэд 201 OK            
+                     expected response to have status code 200 but got 201 
+                     at assertion:0 in test-script                         
+                     inside "SP-01 / Registrations"                        
+exit=1
